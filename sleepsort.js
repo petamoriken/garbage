@@ -1,9 +1,9 @@
 (function() {
 	"use strict";
 
-	var window = window || global;
+	var global = Function("return this")();
 
-	window.sleepSort = function(array, callback) {
+	global.sleepSort = function(array, callback) {
 		array = array || [];
 		callback = callback || function(){};
 
@@ -24,7 +24,7 @@
 	};
 
 	Array.prototype.sleepSort = function(callback) {
-		window.sleepSort(this, callback);
+		global.sleepSort(this, callback);
 	};
 
 })();
