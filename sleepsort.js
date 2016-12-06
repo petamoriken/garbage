@@ -1,30 +1,22 @@
-(function() {
-	"use strict";
+"use strict";
 
-	var global = Function("return this")();
+Array.prototype.sleepSort = async function() {
+	if(!Array.isArray(this)) {
+		throw new TypeError("this is not an array");
+	}
 
-	global.sleepSort = function(array, callback) {
-		array = array || [];
-		callback = callback || function(){};
+	const ret = [];
 
-		var length = array.length, counter = 0, ret = [];
+	const promises = [];
+	for(const val of this) {
+		promises.push(new Promise(resolve => {
+			setTimeout(() => {
+				ret.push(val);
+				resolve();
+			}, val * 1000);
+		}));
+	}
+	await Promise.all(promises);
 
-		for(var i=0; i<length; ++i) {
-			var val = array[i];
-			setTimeout(setValue, val*1000, val);
-		}
-
-		function setValue(val) {
-			ret.push(val);
-			++counter;
-			if(counter === length) {
-				callback(ret);
-			}
-		}
-	};
-
-	Array.prototype.sleepSort = function(callback) {
-		global.sleepSort(this, callback);
-	};
-
-})();
+	return ret;
+};
