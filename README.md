@@ -1,7 +1,7 @@
-#Garbage
+# Garbage
 
 to see only waste
 
-##License
+## License
 
 NYSL Version 0.9982 (http://www.kmonos.net/nysl/)
